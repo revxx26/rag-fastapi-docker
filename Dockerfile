@@ -1,9 +1,9 @@
-FROM python:3.11-slim
+# ========== STAGE 1: install dependencies ==========
+FROM python:3.11-slim AS builder
 
-WORKDIR /app
+WORKDIR /build
 
-# Copy hanya file penting (bukan venv)
-COPY main.py sample.pdf ./
+RUN pip install --upgrade pip
 
 RUN pip install --no-cache-dir \
     fastapi \
@@ -14,6 +14,17 @@ RUN pip install --no-cache-dir \
     pypdf \
     chromadb \
     sentence-transformers
+
+# ========== STAGE 2: runtime image (kecil) ==========
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Copy hanya library yang sudah terinstall
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+
+# Copy file app kamu saja
+COPY main.py sample.pdf ./
 
 EXPOSE 8000
 
