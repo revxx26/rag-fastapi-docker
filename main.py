@@ -29,7 +29,8 @@ if not API_KEY:
 
 embeddings = OpenAIEmbeddings(
     openai_api_key=API_KEY,
-    openai_api_base="https://openrouter.ai/api/v1"
+    openai_api_base="https://openrouter.ai/api/v1",
+    model="text-embedding-3-small"   # <-- PENTING
 )
 
 vector_db = Chroma.from_documents(
