@@ -2,17 +2,18 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY . .
+# Copy hanya file penting (bukan venv)
+COPY main.py sample.pdf ./
 
 RUN pip install --no-cache-dir \
-    fastapi uvicorn \
-    langchain langchain-community langchain-openai \
-    langchain-text-splitters pypdf chromadb \
+    fastapi \
+    uvicorn \
+    langchain-community \
+    langchain-openai \
+    langchain-text-splitters \
+    pypdf \
+    chromadb \
     sentence-transformers
-
-ENV OPENAI_API_KEY=${OPENAI_API_KEY}
-ENV OPENAI_BASE_URL=${OPENAI_BASE_URL}
-
 
 EXPOSE 8000
 
