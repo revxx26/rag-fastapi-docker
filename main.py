@@ -20,8 +20,15 @@ text_splitter = RecursiveCharacterTextSplitter(
 
 docs = text_splitter.split_documents(documents)
 
+API_KEY = os.getenv("OPENAI_API_KEY") or os.getenv("OPENROUTER_API_KEY")
+
+if not API_KEY:
+    raise RuntimeError(
+        "API KEY TIDAK DITEMUKAN! Set OPENAI_API_KEY atau OPENROUTER_API_KEY."
+    )
+
 embeddings = OpenAIEmbeddings(
-    openai_api_key=os.getenv("OPENROUTER_API_KEY"),
+    openai_api_key=API_KEY,
     openai_api_base="https://openrouter.ai/api/v1"
 )
 
