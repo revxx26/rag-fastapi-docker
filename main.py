@@ -28,14 +28,9 @@ if not API_KEY:
     )
 
 embeddings = OpenAIEmbeddings(
-    openai_api_key=API_KEY,
-    base_url="https://openrouter.ai/api/v1",   # <-- WAJIB pakai base_url
-    model="text-embedding-3-small",
-    default_headers={
-        "HTTP-Referer": "https://railway.app",   # WAJIB untuk OpenRouter
-        "X-Title": "rag-fastapi-docker"          # bebas, asal ada
-    }
+    model="text-embedding-3-small"
 )
+
 
 vector_db = Chroma.from_documents(
     documents=docs,
