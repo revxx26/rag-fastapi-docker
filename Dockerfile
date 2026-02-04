@@ -9,6 +9,9 @@ RUN pip install --no-cache-dir \
     langchain langchain-community langchain-openai\
     langchain-text-splitters pypdf chromadb openai
 
+ENV OPENAI_API_KEY=${OPENAI_API_KEY}
+ENV OPENAI_BASE_URL=${OPENAI_BASE_URL}
+
 
 EXPOSE 8000
 
