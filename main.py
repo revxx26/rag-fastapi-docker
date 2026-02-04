@@ -6,6 +6,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 app = FastAPI(
     title="RAG Company Assistant")
@@ -27,8 +28,8 @@ if not API_KEY:
         "API KEY TIDAK DITEMUKAN! Set OPENAI_API_KEY atau OPENROUTER_API_KEY."
     )
 
-embeddings = OpenAIEmbeddings(
-    model="text-embedding-3-small"
+embeddings = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
 
 

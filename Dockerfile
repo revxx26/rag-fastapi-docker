@@ -6,8 +6,9 @@ COPY . .
 
 RUN pip install --no-cache-dir \
     fastapi uvicorn \
-    langchain langchain-community langchain-openai\
-    langchain-text-splitters pypdf chromadb openai
+    langchain langchain-community langchain-openai \
+    langchain-text-splitters pypdf chromadb \
+    sentence-transformers
 
 ENV OPENAI_API_KEY=${OPENAI_API_KEY}
 ENV OPENAI_BASE_URL=${OPENAI_BASE_URL}
